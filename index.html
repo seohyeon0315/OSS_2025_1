@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- CSS 연결 -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- 폰트 & 아이콘 -->
+  <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+
+  <title>Tripiary</title>
+</head>
+<body>
+  <div class="container">
+    <!-- 헤더 -->
+    <div id="header-container"></div>
+
+    <!-- 메인 컨텐츠 -->
+    <div class="main">
+      <div class="left">
+        <div class="text">
+          <h5>WELCOME TO TRIPIARY</h5><br>
+          <h2>여행의 순간을 기록하고 공유해보세요</h2><br>
+          <p>
+            내가 다녀온 장소, 걷던 길을 코스로 저장하고<br />
+            다른 사람의 코스도 참고하며 새로운 여행을 계획해보세요.
+          </p>
+        </div>
+        <div class="findButton">
+          <button onclick="window.location.href='MyCourse.html'">나의 코스</button>
+          <button onclick="alert('공개 코스 보기')">공개 코스 검색</button>
+        </div>
+      </div>
+
+      <div class="right">
+        <img src="https://cdn.hkbs.co.kr/news/photo/202405/755302_490954_5034.jpg" alt="여행 이미지">
+      </div>
+    </div>
+    <script>
+      fetch('header.html')
+        .then(res => res.text())
+        .then(data => {
+          document.getElementById('header-container').innerHTML =data;
+        });
+    </script>
+  </div>
+</body>
+</html>
