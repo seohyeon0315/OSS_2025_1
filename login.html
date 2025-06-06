@@ -4,13 +4,21 @@
   <meta charset="UTF-8" />
   <title>로그인 - Tripiary</title>
   <link rel="stylesheet" href="style.css" />
+
+    <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script src="auto-logout.js"></script>
+  <!-- 네가 만든 기능 파일 -->
+  <script src="script.js"></script>
 </head>
+
 <body>
   <div class="login-wrapper">
     <h2>Login</h2>
-    <form method="post" action="서버의url" id="login-form">
-     <input type="email" placeholder="이메일" /><br>
-     <input type="password" placeholder="비밀번호" /><br>
+    <form method="post" action="서버의url" id="login-form" onsubmit="login(event)">
+     <input id="loginEmail" type="email" placeholder="이메일" /><br>
+     <input id="loginPw" type="password" placeholder="비밀번호" /><br>
       <input type="submit" value="로그인"></input>
      <p style="margin-top: 10px;">
       계정이 없으신가요?

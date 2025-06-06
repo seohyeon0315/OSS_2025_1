@@ -8,7 +8,7 @@
     <nav class="menubar">
       <ul>
         <li><a href="index.html">홈</a></li>
-        <li><a href="MyCourse.html">나의 코스</a></li>
+        <li><a href="#" onclick="goToMyCourse()">나의 코스</a></li>
         <li><a href="#">공개 코스</a></li>
         <li><a href="#">커뮤니티</a></li>
         <li><a href="#">고객센터</a></li>
@@ -16,8 +16,8 @@
     </nav>
   
     <div class="signButton">
-      <button onclick="window.location.href='login.html'">로그인</button>
-      <button onclick="window.location.href='register.html'">회원가입</button>
+      <button id="login-btn" onclick="window.location.href='login.html'">로그인</button>
+      <button id="register-btn" onclick="window.location.href='register.html'">회원가입</button>
+      <button id="logout-btn" onclick="logout()" style="display : none">로그아웃</button>
     </div>
-  </nav>
-  
+</nav>

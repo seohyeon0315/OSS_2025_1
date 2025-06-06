@@ -13,7 +13,18 @@
   <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
 
   <title>Tripiary</title>
+
+  <!-- Firebase SDK (CDN용) -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+  <script src="auto-logout.js"></script>
+  <script src="script.js"></script>
+  
+
 </head>
+
 <body>
   <div class="container">
     <!-- 헤더 -->
@@ -31,7 +42,7 @@
           </p>
         </div>
         <div class="findButton">
-          <button onclick="window.location.href='MyCourse.html'">나의 코스</button>
+          <button onclick="goToMyCourse()">나의 코스</button>
           <button onclick="alert('공개 코스 보기')">공개 코스 검색</button>
         </div>
       </div>
@@ -45,6 +56,10 @@
         .then(res => res.text())
         .then(data => {
           document.getElementById('header-container').innerHTML =data;
+          const script = document.createElement('script');
+          script.src='headerLogic.js';
+          script.onload=()=>setupAuthUI();
+          document.body.appendChild(script);
         });
     </script>
   </div>
