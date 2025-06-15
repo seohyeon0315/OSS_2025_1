@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>코스 상세 보기 - Tripiary</title>
+  <link rel="stylesheet" href="style.css" />
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+  <script src="auto-logout.js"></script>
+  <script src="CourseDetail.js" defer></script>
+</head>
+
+<body>
+  <div id="header-container"></div>
+
+  <div class="container">
+    <h2 id="course-title">코스 제목 로딩 중...</h2>
+    <p id="course-author">@작성자</p>
+    <ul id="course-place-list"></ul>
+  </div>
+
+  <script>
+    fetch("header.html")
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById("header-container").innerHTML = data;
+        const script = document.createElement("script");
+        script.src = "headerLogic.js";
+        document.body.appendChild(script);
+      });
+  </script>
+</body>
+</html>

@@ -287,3 +287,238 @@ a {
   opacity: 0.6;
   cursor: not-allowed;
 }
+
+
+/*공개코스*/
+.public-course-container {
+  padding: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+.course-card {
+  width: 300px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  padding: 15px;
+  text-align: center;
+  border: 2px solid #eee;
+}
+
+.course-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.course-card h4 {
+  font-size: 18px;
+  margin: 10px 0 6px;
+}
+
+.course-card p {
+  font-size: 14px;
+  color: #444;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.course-card .author {
+  font-size: 13px;
+  color: #888;
+  margin-bottom: 8px;
+}
+
+.course-button {
+  margin-top: 10px;
+  background: #b2ebf2;
+  border: none;
+  border-radius: 12px;
+  padding: 10px 18px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.heart {
+  font-size: 22px;
+  color: pink;
+  margin-bottom: 8px;
+}
+
+.search-bar {
+  text-align: center;
+  margin: 20px;
+}
+
+#courseSearchInput {
+  width: 50%;
+  padding: 12px;
+  font-size: 16px;
+  border: 2px solid #ccc;
+  border-radius: 30px;
+}
+
+#courseSearchBtn {
+  padding: 10px 20px;
+  margin-left: 8px;
+  font-size: 16px;
+  background-color: #4fc3f7;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+#courseSearchBtn:hover {
+  background-color: #0288d1;
+}
+
+/*즐겨찾기 하트 버튼*/
+.heart {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: red;
+  padding: 4px;
+  transition: transform 0.1s;
+}
+
+.heart:hover {
+  transform: scale(1.2);
+}
+
+.heart:active {
+  transform: scale(0.9);
+}
+/*끝*/
+
+/*즐겨찾기 보기 버튼*/
+.floating-heart {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: white;
+  border: 2px solid red;
+  color: red;
+  font-size: 28px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  z-index: 1000;
+  transition: background-color 0.2s;
+}
+
+.floating-heart:hover {
+  background-color: #ffe6e6;
+}
+/*즐겨찾기 버튼 끝*/
+
+
+/*공개코스 자세히보기*/
+#map {
+  flex: 3;
+  height: 100%;
+}
+
+.sidebar {
+  flex: 1;
+  background-color: #f8f8f8;
+  border-left: 1px solid #ddd;
+  padding: 16px;
+  overflow-y: auto;
+}
+
+.sidebar h3 {
+  margin-top: 0;
+  font-size: 18px;
+}
+
+.place-item {
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.place-item:last-child {
+  border-bottom: none;
+}
+
+/*공개코스 자세히 보기*/
+.title-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.back-button {
+  padding: 6px 12px;
+  background-color: #5994bb;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.back-button:hover {
+  background-color: #45a049;
+}
+
+#course-title {
+  margin: 0;
+  font-size: 24px;
+}
+
+/*공개 코스*/
+.course-item {
+  margin-bottom: 20px;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.course-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.course-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.course-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.course-author {
+  margin: 0;
+  font-size: 14px;
+  color: #666;
+}
+
+.heart-icon {
+  font-size: 20px;
+  background: none;
+  border: none;
+  color: gray;
+  cursor: pointer;
+}
+
+.heart-icon.favorited {
+  color: red;
+}

@@ -10,6 +10,7 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const db = firebase.firestore();
+const FieldValue=firebase.firestore.FieldValue;
 
 auth.setPersistence(firebase.auth.Auth.Persistence.SESSION)
   .then(() =>

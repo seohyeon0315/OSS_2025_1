@@ -66,19 +66,67 @@ function updateCourseList() {
       if (confirm(`'${name}' 코스를 삭제할까요?`)) {
         const user=firebase.auth().currentUser;
         if(user){
-          db.collection("courses").doc(`${user.uid}_${name}`).delete().then(()=>{
-            delete courseData[name];
-            updateCourseList();
-            clearMarkers();
-            document.getElementById("course-place-box").style.display="none";
-            alert(`'${name}' 코스가 삭제되었습니다.`);
-          }).catch((err)=>{
-            alert("코스 삭제 실패: "+err);
-          });
+          const courseId=`${user.uid}_${name}`;
+
+          const userCourseRef=db.collection("courses").doc(courseId);
+          const publicCourseRef=db.collection("public_courses").doc(courseId);
+
+          Promise.all([
+            userCourseRef.delete(),
+            publicCourseRef.delete()
+          ])
+            .then(() => {
+              delete courseData[name];
+              updateCourseList();
+              clearMarkers();
+              document.getElementById("course-place-box").style.display = "none";
+              alert(`'${name}' 코스와 공개 코스가 삭제되었습니다.`);
+            })
+            .catch((err) => {
+              alert("코스 삭제 실패: " + err);
+            });
+        }
       }
-    }
     };
 
+    const publicToggle=document.createElement("input");
+    publicToggle.type="checkbox";
+   
+    if (courseData[name]._isPublic === undefined) {
+      courseData[name]._isPublic = false;
+    }
+
+    const toggleBtn = document.createElement("button");
+    toggleBtn.textContent = courseData[name]._isPublic ? "공개됨" : "비공개";
+    toggleBtn.style.background = courseData[name]._isPublic ? "#4caf50" : "#ccc";
+    toggleBtn.style.color = "#fff";
+    toggleBtn.style.border = "none";
+    toggleBtn.style.padding = "6px 10px";
+    toggleBtn.style.marginLeft = "10px";
+    toggleBtn.style.borderRadius = "10px";
+    toggleBtn.style.cursor = "pointer";
+
+    toggleBtn.onclick = () => {
+      const user = firebase.auth().currentUser;
+
+      if (!user) {
+        alert("로그인이 필요합니다.");
+        return;
+      }
+  const newStatus = !courseData[name]._isPublic;
+      db.collection("courses").doc(`${user.uid}_${name}`).update({
+        isPublic: newStatus
+      }).then(() => {
+        courseData[name]._isPublic = newStatus;
+        toggleBtn.textContent = newStatus ? "공개됨" : "비공개";
+        toggleBtn.style.background = newStatus ? "#4caf50" : "#ccc";
+      }).catch((err) => {
+        console.error("공개 상태 변경 실패:", err);
+        alert("공개 상태 변경에 실패했습니다.");
+      });
+    };
+
+    btnGroup.appendChild(toggleBtn);
     btnGroup.appendChild(editBtn);
     btnGroup.appendChild(deleteBtn);
 
@@ -86,6 +134,8 @@ function updateCourseList() {
     li.appendChild(btnGroup);
     list.appendChild(li);
   }
+
+
 }
     
 function showCourse(courseName) {
@@ -134,7 +184,7 @@ function showCourse(courseName) {
     infoContent.innerHTML=`
       <div class="memo-title">${p.title}</div><br>
       <div class="memo-box">
-        ${p.memo ? p.memo.trim() : "📝 메모가 없습니다."}
+        ${p.memo ? p.memo.trim() : "메모가 없습니다."}
       </div>
 
       <button class="memo-button">메모 작성</button>
@@ -178,7 +228,6 @@ function showCourse(courseName) {
   title.textContent = `[${courseName}] 코스 장소`;
   list.innerHTML = "";
 
-  // 🔧 여기 forEach에 index도 같이 받기
   points.forEach((p, index) => {
     const li = document.createElement("li");
     li.className="course-item";
@@ -256,11 +305,17 @@ function loadCoursesFromFirestore(){
         title:p.title,
         lat:p.lat,
         lng:p.lng,
-        memo:p.memo || ""
+        memo:p.memo || "",
       }));
+      courseData[data.title]._isPublic=data.isPublic || false;
     });
     updateCourseList();
+    if(!perservedEditMode && currentEditingCourse){
+      showCourse(currentEditingCourse);
+    }
   })
+
+
   .catch((error)=>{
     console.error("코스 불러오기 실패:",error);
   });
@@ -278,7 +333,7 @@ function openSearchUI(courseName){
   document.getElementById("search-course-title").textContent=`[${courseName}] 수정 중`;
   document.getElementById("search-bar").style.display="block";
   document.getElementById("search-input").value="";
-  //코스 목록 창 닫기
+
   const box=document.getElementById("course-place-box");
   if(box)box.style.display="none";
 }
@@ -339,14 +394,13 @@ function searchPlaces(){
           };
           courseData[currentEditingCourse].push(point);
           saveCourseToFirebase(currentEditingCourse);
-          //텍스트 스타일 변경
           titleSpan.style.color="#007bff";
           titleSpan.style.fontWeight="bold";
           titleSpan.style.padding="2px 4px";
           titleSpan.style.borderRadius="4px";
 
           marker.setImage(starMarkerImage); //마커색 초록색으로 변경
-          //버튼 비활성화화
+          //버튼 비활성화
           addBtn.disabled=true;
           addBtn.textContent="추가됨";
           addBtn.style.opacity="0.6";
@@ -369,6 +423,17 @@ function searchPlaces(){
   });
 }
 
+function getDefaultImageUrl(courseName) {
+  if (courseName.includes("부산"))
+    return "https://cdn.pixabay.com/photo/2022/04/04/04/17/beach-7109616_1280.jpg";
+  if (courseName.includes("서울"))
+    return "/image/seoul.png";
+  if (courseName.includes("대구"))
+    return "/image/daegu.png";
+  return "/image/default.png";
+}
+
+
 //firebase 저장하기
 function saveCourseToFirebase(courseName){
   const user=firebase.auth().currentUser;
@@ -380,13 +445,15 @@ function saveCourseToFirebase(courseName){
     userId :user.uid,
     title :courseName,
     points :courseData[courseName],
-    timestamp:firebase.firestore.FieldValue.serverTimestamp()
+    timestamp:firebase.firestore.FieldValue.serverTimestamp(),
+    isPublic: courseData[courseName]._isPublic || false,
+    imageUrl:getDefaultImageUrl(courseName)
   }).then(()=>{
-    alert("코스가 저장되었습니다.");
-    loadCoursesFromFirestore();
-    showCourse(courseName); //ui 다시 갱신
+    console.log("코스가 저장되었습니다.");
+    loadCoursesFromFirestore(false);
   }).catch((err)=>{
     alert("코스 저장 실패 : ",err);
     alert("코스 저장 중 오류가 발생했습니다.");
   });
 }
+

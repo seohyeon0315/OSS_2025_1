@@ -13,6 +13,10 @@ function goToMyCourse() {
   });
 }
 
+function goToPublicCourse() {
+  window.location.href = 'PublicCourse.html';
+}
+
 
 function register(event){
   event.preventDefault();

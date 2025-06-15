@@ -6,9 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>나의 코스 - Tripiary</title>
 
-  <!-- CSS -->
+
   <link rel="stylesheet" href="style.css" />
-  <!-- 카카오 지도 API -->
+
   <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=95d0851cc64614c89dca1fda08570955&libraries=services&autoload=false"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
@@ -17,12 +17,13 @@
 </head>
 
 <body>
-  <!-- 공통 헤더 로드 영역 -->
+
   <div id="header-container"></div>
 
-  <!-- 본문 -->
+
   <div class="main" style="position: relative; display: flex; height: calc(100vh - 100px);">
-    <!-- 왼쪽: 코스 목록 -->
+
+    
     <div style="width: 25%; padding: 20px; border-right: 1px solid #ccc;">
       <h3>나의 코스</h3>
       <ul id="course-list" style="list-style: none; padding: 0;"></ul>
@@ -67,7 +68,7 @@
           cursor: pointer;
           font-weight: bold;
           box-shadow: 0 2px 4px rgba(0,0,0,0.2);">수정 끝</button>
-          <!--<ul id="search-results" style ="list-style:none"; padding:10px 0 0  0; margin: 0px></ul>-->
+
       </div>
       <ul id="search-results" style="
         position : absolute;
@@ -90,7 +91,7 @@
     </div>
   </div>
 
-  <!-- 공통 헤더 불러오기 -->
+
   <script>
     fetch("header.html")
       .then(res => res.text())
@@ -105,7 +106,7 @@
 
   <script src="script.js"></script>
 
-  <!-- 지도 및 코스 처리 JS -->
+
   <script src="Mapscript.js"></script>
 
 

@@ -5,16 +5,13 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- CSS 연결 -->
   <link rel="stylesheet" href="style.css">
 
-  <!-- 폰트 & 아이콘 -->
   <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
 
   <title>Tripiary</title>
 
-  <!-- Firebase SDK (CDN용) -->
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
@@ -27,10 +24,9 @@
 
 <body>
   <div class="container">
-    <!-- 헤더 -->
-    <div id="header-container"></div>
+  <div id="header-container"></div>
 
-    <!-- 메인 컨텐츠 -->
+
     <div class="main">
       <div class="left">
         <div class="text">
@@ -43,7 +39,7 @@
         </div>
         <div class="findButton">
           <button onclick="goToMyCourse()">나의 코스</button>
-          <button onclick="alert('공개 코스 보기')">공개 코스 검색</button>
+          <button onclick="goToPublicCourse()">공개 코스 검색</button>
         </div>
       </div>
 

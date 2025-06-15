@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <title>코스 상세 보기</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+    <script src="auto-logout.js"></script>
+    <script src="script.js"></script>
+    <script src="PublicCourse.js"></script>
+    <script src="headerLogic.js" defer></script>
+    <script src="CourseDetail.js" defer></script>
+
+    <style>
+        #map { width: 100%; height: 600px; }
+        body { font-family: Arial, sans-serif; padding: 20px; }
+    </style>
+</head>
+<body>
+    <div id="header-container"></div>
+
+    <div class="title-bar">
+    <button class="back-button" onclick="history.back()">←</button>
+    <h2 id="course-title">코스 제목</h2>
+    </div>
+    <p id="course-desc">작성자 ID</p>
+    <div id="map"></div>
+
+    <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=95d0851cc64614c89dca1fda08570955&libraries=services"></script>
+    <script src="PublicCourseDetail.js"></script>
+
+    <script>
+        fetch("Header.html")
+        .then(res => res.text())
+        .then(data => {
+            document.getElementById("header-container").innerHTML = data;
+        });
+    </script>
+</body>
+</html>
