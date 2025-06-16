@@ -1,23 +1,6 @@
 let allCourses =[];
 
-document.addEventListener("DOMContentLoaded", () => {
-db.collection("courses")
-  .where("isPublic", "==", true)
-  .orderBy("timestamp", "desc")
-  .get()
-  .then(async snapshot => {
-    allCourses = [];
 
-    snapshot.forEach(doc => {
-      allCourses.push(doc.data());
-    });
-
-    const favoriteTitles = await getFavoriteTitles();
-    renderCourses(allCourses, favoriteTitles);
-  })
-  .catch(err => {
-    console.error("공개 코스 불러오기 실패:", err);
-  });
 
  function getDefaultImageUrl(title) {
   if (title.includes("부산")){
@@ -173,6 +156,24 @@ function removeFromFavorites(courseTitle){
 let isShowingFavorites = false;
 
 document.addEventListener("DOMContentLoaded", () => {
+db.collection("courses")
+  .where("isPublic", "==", true)
+  .orderBy("timestamp", "desc")
+  .get()
+  .then(async snapshot => {
+    allCourses = [];
+
+    snapshot.forEach(doc => {
+      allCourses.push(doc.data());
+    });
+
+    const favoriteTitles = await getFavoriteTitles();
+    renderCourses(allCourses, favoriteTitles);
+  })
+  .catch(err => {
+    console.error("공개 코스 불러오기 실패:", err);
+  });
+  
   const toggleBtn = document.getElementById("toggleFavorites");
   if (!toggleBtn) {
     console.warn("toggleFavorites 버튼이 아직 DOM에 없음");
@@ -199,7 +200,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
-});
+
 
 
 
