@@ -310,9 +310,9 @@ function loadCoursesFromFirestore(){
       courseData[data.title]._isPublic=data.isPublic || false;
     });
     updateCourseList();
-    if(!perservedEditMode && currentEditingCourse){
-      showCourse(currentEditingCourse);
-    }
+    // if(!preservedEditMode && currentEditingCourse){
+    //   showCourse(currentEditingCourse);
+    // }
   })
 
 

@@ -1,5 +1,6 @@
 let allCourses =[];
 
+document.addEventListener("DOMContentLoaded", () => {
 db.collection("courses")
   .where("isPublic", "==", true)
   .orderBy("timestamp", "desc")
@@ -197,6 +198,7 @@ document.addEventListener("DOMContentLoaded", () => {
       renderCourses(allCourses,favoriteTitles);
     }
   });
+});
 });
 
 
