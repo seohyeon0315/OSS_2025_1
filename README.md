@@ -19,7 +19,9 @@
 - 비밀번호 : 123456
 
 
-#######
+
+
+<h2> 기능들 </h2>
 
 <h3>1. 메인페이지 실행</h3>
 Visual Studio Code 에서 index.html에서 live server로 열면 메인 페이지가 열립니다.
