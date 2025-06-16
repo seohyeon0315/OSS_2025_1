@@ -153,7 +153,7 @@ function showCourse(courseName) {
   currentEditingCourse = "";
 
   const starMarkerImage = new kakao.maps.MarkerImage(
-    "/image/별 마커.png",
+    "/image/star.png",
     new kakao.maps.Size(40, 40),
     { offset: new kakao.maps.Point(20, 40) }
   );
@@ -346,7 +346,7 @@ function closeSearchUI(){
 
 function searchPlaces(){
   const starMarkerImage = new kakao.maps.MarkerImage(
-    "/image/별 마커.png",
+    "/image/star.png",
     new kakao.maps.Size(40,40),
     { offset: new kakao.maps.Point(20, 40) } 
   );
